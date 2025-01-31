@@ -1,0 +1,6 @@
+- name:
+  lineinfile:
+    dest: /etc/profile
+    line: "export JAVA_HOME=/opt/java8 \n export PATH=$PATH:/opt/java8/bin"
+    state: present
+    create: True

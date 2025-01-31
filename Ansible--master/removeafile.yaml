@@ -1,0 +1,4 @@
+- name: remove
+  file:
+    path: /home/ec2-user/jdk8u352-b08
+    state: absent

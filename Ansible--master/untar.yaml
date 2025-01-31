@@ -1,0 +1,7 @@
+#how to untar a tar fiile
+- name: untar
+  unarchive:
+    src: /home/ec2-user/___.tar.gz
+    dest: /home/ec2-user/
+    remote_src: yes
+~                    

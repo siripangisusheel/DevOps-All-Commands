@@ -1,0 +1,78 @@
+[docker]
+docker inspect
+docker exec 
+docker -p
+docker ps -ef
+docker run -dt name of the image
+docker run -it name of the image
+docker rmi -f  name of the image to remove image id
+docker rm -f   to remove container
+docker volumes
+docker run -dt --name c1 -v /app-data httpd[named volumes]
+docker prune [to delete volume]
+docker run -dt --name c1 -v  /home /ec2-user/scripts:/app-vol httpd [hosts volumes]
+docker run -dt --name EC -p 8080:80 -v /home/ec2-user/ecomm:/usr/local/apache2/htdocs/ httpd
+
+[dockerfile]
+#use FROM directive to copy the base image
+#Base image is -httpd
+FROM httpd
+#use COPY directive to copy the code
+COPY . /usr/local/apache2/htdocs/ 
+docker build -t ecomm .
+docker image ls
+docker run -dt --name EC -p 8090:80 ecomm
+
+[Sample Docker File]
+# Base Image
+FROM node:16-alpine
+
+# Set environment variables (if needed)
+ENV NODE_ENV=production
+ENV PORT=3000
+
+# Set working directory in the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json first to install dependencies separately
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install --production
+
+# Copy the rest of the application files
+COPY . .
+
+# Expose the port the app will run on
+EXPOSE 3000
+
+# Set a default command to run the application
+CMD ["node", "server.js"]
+
+# Optional: Add healthcheck for the container
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD curl --fail http://localhost:3000/health || exit 1
+
+# Metadata (optional but good practice)
+LABEL maintainer="youremail@example.com" \
+      version="1.0" \
+      description="A Node.js app container"
+
+# Optional: Clean up cache to reduce the image size (for Alpine-based images)
+RUN rm -rf /root/.npm
+
+[Docker]
+docker - Docker command-line interface (CLI) for managing containers
+docker run <image> - Run a container from an image 。 docker ps - List running containers
+docker ps -a - List all containers, including stopped ones 
+docker build -t <image_name> - Build an image from a Dockerfile
+docker exec -it <container_id> bash - Start an interactive bash shell inside a running container
+docker stop <container_id> - Stop a container
+docker rm <container_id> - Remove a container
+docker logs <container_id> - View logs of a container 
+docker images – List available images
+docker rmi <image_name> - Remove an image 
+docker network 1s - List Docker networks 
+docker-compose - Manage multi-container Docker applications
+docker-compose up - Start up a multi-container environment
+docker-compose down - Stop and remove containers created by docker-compose
+docker-compose logs - View logs from containers managed by docker-compose

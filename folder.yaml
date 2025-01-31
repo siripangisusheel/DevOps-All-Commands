@@ -1,9 +1,0 @@
----
-- hosts: all
-  become: yes
-  tasks:
-    - name: creating a folder
-      file:
-        path: /home/ec2-user/filename2
-        state: directory
-

@@ -1,6 +1,0 @@
-- name: remane java
-  copy:
-    remote_src: true
-    src: /home/ec2-user/filename
-    dest: /home/ec2-user/filename(new)
-
